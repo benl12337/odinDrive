@@ -14,16 +14,18 @@ require("./config/passportConfig");
 
 const app = express(); // create the express app
 app.use(express.json()); // parses all incoming requests with JSON payload
-app.use(express.urlencoded({exetended: true})); // parse incoming requst bodies that are URL encoded
+app.use(express.urlencoded({extended: true})); // parse incoming requst bodies that are URL encoded
 
 // set the view engines and middleware
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(session);
-app.use(sessionStore);
+
+app.use(sessionStore());
+app.use(passport.initialize());
 app.use(passport.session());
+
 
 // ROUTES
 app.use(routes);
