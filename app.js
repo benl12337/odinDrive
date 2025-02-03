@@ -5,7 +5,6 @@ const express = require("express");
 const session = require("express-session");
 const routes = require("./routes/index");
 const path = require("node:path");
-const { PrismaClient } = require('@prisma/client');
 const sessionStore = require("./config/session");
 const passport = require("passport");
 
@@ -21,11 +20,10 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-
+// Sessions and Passport
 app.use(sessionStore());
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // ROUTES
 app.use(routes);
