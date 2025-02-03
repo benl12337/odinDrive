@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap');
+
+
+:root {
+    --accent-colour: #470063;
+    --accent-colour-lighter: #9759af;
+    --accent-colour-darker: #29003a;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-content {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    height: fit-content;
+    border-radius: 15px;
+    background: white;
+    filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.15));
+}
+
+.logo-text {
+    font-family: "Rubik", serif;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+}
+
+.tagline {
+    font-family: "Rubik", serif;
+    font-weight: lighter;
+}
+
+.action-buttons {
+    width: 100%;
+    display: flex;
+}
+
+.main-btn {
+    background: var(--accent-colour);
+    color: white;
+    border: var(--accent-colour-darker);
+}
+
+.main-btn:hover {
+    background: var(--accent-colour-darker);
+}
+
+.second-btn {
+    background-color: white;
+    color: var(--accent-colour);
+    border: 1px solid rgb(231, 228, 228);
+}
+
+.second-btn:hover {
+    background-color: rgb(244, 238, 238);
+}
+
+.submit {
+    padding: 10px;
+    margin: 5px;
+    width: 150px;
+    font-size: 1rem;
+    border-radius: 5px;
+        font-family: "Lato", serif;
+        font-weight: 400;
+        font-style: normal;
+    
+}
+
+.submit:hover {
+    cursor: pointer;
+    transition: 200ms ease;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+form input {
+    margin: 5px;
+    font-family: "Lato", serif;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--accent-colour-lighter);
+}
+
+.footnote {
+    font-family: "Lato", serif;
+    color: grey;
+    a {
+        text-decoration: none;
+        color: var(--accent-colour);
+    }
+}

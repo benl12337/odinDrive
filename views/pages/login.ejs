@@ -1,13 +1,11 @@
-<form method="post">
-    <label>Username</label>
-    <input type="text" name="username">
-    <label>Password</label>
-    <input type="text" name="password">
-    <button>Login</button>
-</form>
+<link rel="stylesheet" href="/index.css">
 
-<% if (user) { %>
-    You are authenticated
-<% } else { %>
-    You are not authenticated
-<% } %>
+<div class="body-content">
+    <div class="tagline"><h1>Login</h1></div>
+    <form method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="password" placeholder="Password">
+        <button class="main-btn submit">Login</button>
+        <p class="footnote">Don't have an account? Sign up <a href="/register">here</a></p>
+    </form>
+</div>

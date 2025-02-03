@@ -6,8 +6,13 @@ const passport = require("passport");
 
 // GET ROUTES
 indexRouter.get("/", (req,res,done)=>{
-    res.render("pages/login", {user: req.user} );
+    // if user is already authenticated, send them to the app homescreen, otherwise show the splash screen
+    req.user ? res.render("pages/home") : res.render("pages/splashscreen");
 });
+
+indexRouter.get("/login", (req,res,done)=>{
+    res.render("pages/login");
+})
 
 indexRouter.get("/register", (req,res,done)=>{
     res.render("pages/register");
@@ -23,9 +28,12 @@ indexRouter.get("/logout", (req,res,next)=>{
 })
 
 // POST ROUTES
+
+// authenticate the user upon login
 indexRouter.post("/", passport.authenticate("local", { successRedirect: "/", failureRedirect: "/login", }),
 );
 
+// create user and redirect to home page
 indexRouter.post("/register", async (req,res,done)=>{
     // get the form body
     const data = req.body;

@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 
 
 const db = {
+    
     getUserByName: async(username) => {
         const user = await prisma.user.findMany({
             where: {
