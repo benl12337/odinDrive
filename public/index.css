@@ -6,6 +6,8 @@
     --accent-colour: #470063;
     --accent-colour-lighter: #9759af;
     --accent-colour-darker: #29003a;
+    --background-colour: #f3edf5;
+    background: var(--background-colour);
 }
 
 body {
@@ -41,6 +43,7 @@ body {
 .action-buttons {
     width: 100%;
     display: flex;
+    align-items: center;
 }
 
 .main-btn {

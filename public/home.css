@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --accent-colour: #470063;
+    --accent-colour-lighter: #9759af;
+    --accent-colour-darker: #29003a;
+    --background-colour: #f3edf5;
+    background: var(--background-colour);
+    margin: 0;
+}
+
+.header {
+    background: white;
+    margin: 0;
+    padding: 20px;
+    filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.15));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 10px;
+        font-family: "Lato", serif;
+    }
+    a:hover {
+        color: rgb(66, 65, 65);
+        transition: ease 300ms;
+        cursor: pointer;
+    }
+}
+
+.main-btn {
+    background: var(--accent-colour);
+    color: white;
+    border: var(--accent-colour);
+}
+
+.main-btn:hover {
+    background: var(--accent-colour-darker);
+    transition: 300ms ease;
+    cursor: pointer;
+}
+
+.submit {
+    padding: 10px;
+    margin: 5px;
+    width: 150px;
+    font-size: 1rem;
+    border-radius: 5px;
+        font-family: "Lato", serif;
+        font-weight: 400;
+        font-style: normal;
+    
+}
+
+.logo-text {
+    font-family: "Rubik", serif;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+}
+
+.main-body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.drive-content {
+    margin-top: 50px;
+    width: 75%;
+    height: 75vh;
+    background:white;
+}
