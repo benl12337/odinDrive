@@ -11,6 +11,7 @@ indexRouter.get("/logout", indexController.logout);
 
 // POST ROUTES
 indexRouter.post("/login", indexController.loginPost);
+indexRouter.post("/folders/:folderId", indexController.folderPost);
 indexRouter.post("/register", indexController.registerPost);
 
 module.exports = indexRouter;

@@ -33,6 +33,15 @@ const db = {
         return folderId;
     },
 
+    getFolderById: async (folderId) => {
+        const folder = await prisma.folder.findFirst({
+            where: {
+                id: folderId,
+            }
+        })
+        return folder;
+    },
+
     getFolderContents: async (folderId) => {
         const contents = await prisma.folder.findMany({
             include: {
@@ -42,7 +51,7 @@ const db = {
                 id: folderId,
             },
         });
-        console.log(contents);
+        return contents[0].childFolders;
     },
     // when creating a new user- also create their root folder in their drive
     createUser: async (username, firstName, lastName, hash) => {
@@ -58,6 +67,15 @@ const db = {
                     },
                 },
             },
+        })
+    },
+  createFolder: async (parentFolderId, userId, folderName) => {
+        await prisma.folder.create({
+            data: {
+                parentId: parentFolderId,
+                userId: userId,
+                name: folderName
+            }
         })
     }
 }
