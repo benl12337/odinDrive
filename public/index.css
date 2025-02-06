@@ -4,6 +4,7 @@
 * {
     padding: 0;
     margin: 0;
+    max-width: 100%;
 }
 
 :root {
@@ -14,24 +15,31 @@
     background: var(--background-colour);
 }
 
-body {
+/* body {
     width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .body-content {
-    width: 35%;
+    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    padding: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-block {
     height: fit-content;
     border-radius: 15px;
     background: white;
+    width: 35%;
+    background: white;
     filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.15));
+    padding: 30px;
 }
 
 .logo-text {
