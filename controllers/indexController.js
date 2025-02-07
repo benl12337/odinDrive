@@ -26,10 +26,14 @@ module.exports = {
 
         // get all child folders and files
         const children = await db.getFolderContents(folderId);
-        console.log('the children are: ',children);
+
+        // get current path
+        const path = await db.getCurrentPath(folderId);
+        const reversedPath = path.reverse();
         res.render("pages/home", {
             currFolder: currFolder,
             children: children,
+            path: path
         });
     },
     loginGet: (req, res, done) => {

@@ -4,38 +4,56 @@
 <%- include('../partials/header.ejs') %>
 
 <!-- Folder creation modal -->
-    <dialog>
-        <form method="post">
-            <label for="folderName">Folder Name:</label>
-            <input type="text" name="folderName">
-            <button>Create</button>
-        </form>
-    </dialog>
+<dialog>
+  <form method="post">
+    <label for="folderName">Folder Name:</label>
+    <input type="text" name="folderName">
+    <button>Create</button>
+  </form>
+</dialog>
 
 
 
 <div class="main-body">
-    <h1><%=currFolder.name%></h1>
-<!-- Retrive all folders and files here -->
- <div class="drive-content">
-    <!-- print the current folder name -->
-    
 
+  <!-- Retrive all folders and files here -->
+  <div class="drive-content">
+    <!-- print the current folder name -->
+    <div class="tab">
+      <% path.map((folder)=>{ %>
+      <p>
+        <a href="/folders/<%=folder.id%>">
+          <%=folder.name%>
+        </a>
+      </p> >
+      <% }) %>
+
+    </div>
     <!-- Show child contents here -->
-    <% children.map((child)=>{ %>
-        <div class="file-row">
-            <a href="/folders/<%=child.id%>"><h3><%=child.name%></h3></a>
-            <button class="delete">Delete</button>
-        </div>
-    <% }) %>
- </div>
+    <div class="folders">
+      <% if (children.length != 0) { %>
+      <% children.map((child)=>{ %>
+      <div class="file-row">
+        <a href="/folders/<%=child.id%>">
+          <h3>
+            <%=child.name%>
+          </h3>
+        </a>
+        <button class="delete">Delete</button>
+      </div>
+      <% }) %>
+      <% } else { %>
+      <h1>No items in this folder</h1>
+      <% } %>
+    </div>
+  </div>
 </div>
 
 <script defer>
-    const dialog = document.querySelector("dialog");
-    const showButton = document.querySelector(".submit");
+  const dialog = document.querySelector("dialog");
+  const showButton = document.querySelector(".submit");
 
-    showButton.addEventListener("click", ()=>{
-        dialog.showModal();
-    })
+  showButton.addEventListener("click", () => {
+    dialog.showModal();
+  })
 </script>

@@ -33,6 +33,24 @@ const db = {
         return folderId;
     },
 
+    getCurrentPath: async (currFolderId) => {
+        // create an array of folder paths
+        const path = [];
+        
+        // get the current folder
+        const folder = await db.getFolderById(currFolderId);
+        path.push(folder);
+        let parentFolderId = folder.parentId;
+
+        while (parentFolderId) {
+            let folder = await db.getFolderById(parentFolderId);
+            path.push(folder);
+            parentFolderId = folder.parentId;
+        }
+
+        return path;
+    },
+
     getFolderById: async (folderId) => {
         const folder = await prisma.folder.findFirst({
             where: {
