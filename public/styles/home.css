@@ -131,10 +131,18 @@ body {
         flex-direction: column;
         width: 100%;
     }
+    input {
+        width: 100%;
+        margin: 0;
+    }
+    h1 {
+        margin-bottom: 15px;
+    }
 }
 
 .file-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 60% 20% 20%;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
@@ -143,7 +151,11 @@ body {
     border-bottom: 1px solid rgb(236, 229, 229);
     font-family: "Roboto", serif;
     font-weight: 100;
-    color: red;
+p {
+    margin-left: 5px;
+    color: rgb(102, 100, 100);
+    font-size: .75rem;
+}    
     a {
         text-decoration: none;
         color: black;
@@ -216,9 +228,10 @@ body {
     justify-content: right;
     button {
         padding: 10px 20px;
-        margin: 0px 5px;
         border-radius: 5px;
         border: 0;
+        margin-left: 10px;
+        margin-top: 10px;
         font-family: "Lato", serif;
     }
     button:hover {
@@ -229,5 +242,21 @@ body {
     .create {
         background: var(--accent-colour);
         color: white;
+    }
+}
+
+
+.attributes-header {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 60% 20% 20%;
+    h2 {
+        font-family: "Roboto";
+        font-weight: 300;
+        font-size: 1rem;
+        color: rgb(122, 122, 122);
     }
 }
