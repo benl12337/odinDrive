@@ -1,31 +1,44 @@
-<link rel="stylesheet" href="/home.css">
+<link rel="stylesheet" href="/styles/home.css">
 
 <!-- Universal nav bar -->
 <%- include('../partials/header.ejs') %>
 
 <!-- Folder creation modal -->
-<dialog>
+<dialog class="folder-dialog">
   <form method="post">
     <label for="folderName">Folder Name:</label>
     <input type="text" name="folderName">
-    <button>Create</button>
+    <div class="modal-btns">
+      <button class="cancel cancel">Cancel</button>
+      <button class="create">Create</button>
+    </div>
   </form>
 </dialog>
 
-
+<dialog class="upload-dialog">
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" />
+    <div class="modal-btns">
+      <button class="cancel-upload cancel">Cancel</button>
+      <button class="create">Upload</button>
+    </div>
+  </form>
+</dialog>
 
 <div class="main-body">
 
   <!-- Retrive all folders and files here -->
   <div class="drive-content">
-    <!-- print the current folder name -->
+
+    <!-- print the current folder path name -->
     <div class="tab">
-      <% path.map((folder)=>{ %>
-      <p>
-        <a href="/folders/<%=folder.id%>">
-          <%=folder.name%>
-        </a>
-      </p> >
+      <% path.forEach((folder, index)=>{ %>
+      <a href="/folders/<%=folder.id%>">
+        <%=folder.name%>
+      </a>
+      <% if (index !== path.length - 1) { %>
+      <p> > </p>
+      <% } %>
       <% }) %>
 
     </div>
@@ -35,25 +48,48 @@
       <% children.map((child)=>{ %>
       <div class="file-row">
         <a href="/folders/<%=child.id%>">
-          <h3>
+          <img src="/img/folder.svg" class="folder-img">
+          <h3 class="folder-name">
             <%=child.name%>
           </h3>
         </a>
-        <button class="delete">Delete</button>
+        <div class="folder-btns">
+          <button>Edit</button>
+          <button class="delete">Delete</button>
+        </div>
       </div>
       <% }) %>
       <% } else { %>
-      <h1>No items in this folder</h1>
+      <div class="error-msg">
+        <h4>No items in this folder</h4>
+      </div>
       <% } %>
     </div>
   </div>
 </div>
 
 <script defer>
-  const dialog = document.querySelector("dialog");
-  const showButton = document.querySelector(".submit");
+  const dialog = document.querySelector(".folder-dialog");
+  const uploadDialog = document.querySelector(".upload-dialog");
+  const showButton = document.querySelector(".main-btn");
+  const showUploadButton = document.querySelector(".upload");
+  const cancelUploadButton = document.querySelector(".cancel-upload");
+  const cancelButton = document.querySelector(".cancel");
 
   showButton.addEventListener("click", () => {
     dialog.showModal();
-  })
+  });
+  showUploadButton.addEventListener("click", () => {
+    uploadDialog.showModal();
+  });
+
+  cancelUploadButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    uploadDialog.close();
+  });
+
+  cancelButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    dialog.close();
+  });
 </script>

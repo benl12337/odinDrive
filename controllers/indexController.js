@@ -1,6 +1,8 @@
 const db = require("../db/queries");
 const genPassword = require("../lib/passwordUtils").genPassword;
 const passport = require("passport");
+const multer = require('multer');
+const upload = multer({dest: 'public'});
 
 
 module.exports = {
