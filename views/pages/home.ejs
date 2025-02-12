@@ -69,7 +69,9 @@
             <%=child.name%>
           </h3>
         </a>
-        <p>-</p>
+
+        <!-- if a folder, show - otherwise show the file size -->
+        <p><%=child.size ? child.size : '-'%></p>
         <div class="folder-btns">
           <p><%=child.created%></p>
         </div>

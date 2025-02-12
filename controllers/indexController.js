@@ -18,6 +18,7 @@ module.exports = {
                 rootFolder = await db.getRootFolder(userId);
             }
 
+            // get all children folders and files
             const getChildrenContents = await db.getFolderContents(rootFolder.id);
             
             // redirect to user's root folder
@@ -37,6 +38,7 @@ module.exports = {
         // get current path
         const path = await db.getCurrentPath(folderId);
         const reversedPath = path.reverse();
+        console.log(children);
         res.render("pages/home", {
             currFolder: currFolder,
             children: children,
