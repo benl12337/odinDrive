@@ -42,7 +42,8 @@ module.exports = {
         res.render("pages/home", {
             currFolder: currFolder,
             children: children,
-            path: path
+            path: path,
+            userMessage: res.locals.userMessage,
         });
     },
     loginGet: (req, res, done) => {
@@ -66,7 +67,12 @@ module.exports = {
        const currFolder = Number(req.params.folderId);
         
        // create a new folder with the current folderId as the parent
-       await db.createFolder(currFolder, req.user.id, req.body.folderName);
+       try {
+        await db.createFolder(currFolder, req.user.id, req.body.folderName);
+        res.locals.userMessage = 'File Uploaded!!'
+       } catch (err) {
+        console.error(err);
+       }
        res.redirect(`/folders/${currFolder}`);
     },
 
@@ -83,8 +89,7 @@ module.exports = {
         
 
         // create file reference
-        
-        await db.createFile(Number(parentId), userId, file.filename, file.path, file.size);
+        await db.createFile(Number(parentId), userId, file.originalname, file.path, file.size);
 
         setTimeout(()=>{
             res.redirect(`/folders/${req.params.folderId}`);

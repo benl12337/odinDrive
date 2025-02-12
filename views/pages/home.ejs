@@ -64,7 +64,7 @@
       <% children.map((child)=>{ %>
       <div class="file-row">
         <a href="/folders/<%=child.id%>">
-          <img src="/img/folder.svg" class="folder-img">
+          <img src="/img/<%=child.type == 'FILE' ? 'file.svg' : 'folder.svg'%>" class="item-img">
           <h3 class="folder-name">
             <%=child.name%>
           </h3>
@@ -85,6 +85,8 @@
     </div>
   </div>
 </div>
+
+<h1><%= userMessage %></h1>
 
 <script defer>
   const dialog = document.querySelector(".folder-dialog");
