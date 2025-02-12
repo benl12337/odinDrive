@@ -1,9 +1,7 @@
 const db = require("../db/queries");
 const genPassword = require("../lib/passwordUtils").genPassword;
 const passport = require("passport");
-const multer = require('multer');
-const upload = multer({dest: 'public'});
-
+const convertSize = require("../lib/convertSize");
 
 module.exports = {
     indexGet: async (req, res, done) => {
@@ -12,7 +10,14 @@ module.exports = {
         if (req.isAuthenticated()) {
 
             const userId = req.user.id;
-            const rootFolder = await db.getRootFolderId(userId);
+            let rootFolder = await db.getRootFolder(userId);
+
+            // if root folder doesn't exist, create one
+            if (!rootFolder) {
+                await db.createFolder(null, userId, 'My Drive');
+                rootFolder = await db.getRootFolder(userId);
+            }
+
             const getChildrenContents = await db.getFolderContents(rootFolder.id);
             
             // redirect to user's root folder
@@ -68,6 +73,21 @@ module.exports = {
             successRedirect: "/", failureRedirect: "/login",
         }
     ),
+    
+    uploadPost: async (req,res,done) => {
+        const file = req.file;
+        const userId = req.user.id;
+        const parentId = req.params.folderId;
+        
+
+        // create file reference
+        
+        await db.createFile(Number(parentId), userId, file.filename, file.path, file.size);
+
+        setTimeout(()=>{
+            res.redirect(`/folders/${req.params.folderId}`);
+        }, 3000);
+    },
 
     registerPost: async (req, res, done) => {
         // get the form body

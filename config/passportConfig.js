@@ -4,6 +4,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const validPassword = require("../lib/passwordUtils").validPassword;
 const db = require("../db/queries");
 
+
 // function that runs when the password needs to be verified
 const verifyCallback = async(username, password, done) => {
     console.log('verifying the callback now....');

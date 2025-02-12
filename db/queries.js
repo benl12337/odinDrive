@@ -23,14 +23,14 @@ const db = {
         return user[0];
     },
 
-    getRootFolderId: async (userId) => {
+    getRootFolder: async (userId) => {
         // search for folder where parentId is NULL and folder userId matches
-        const folderId = await prisma.folder.findFirst({
+        const rootFolder = await prisma.item.findFirst({
             where: {
                 userId: userId,
             }
         })
-        return folderId;
+        return rootFolder;
     },
 
     getCurrentPath: async (currFolderId) => {
@@ -52,7 +52,7 @@ const db = {
     },
 
     getFolderById: async (folderId) => {
-        const folder = await prisma.folder.findFirst({
+        const folder = await prisma.item.findFirst({
             where: {
                 id: folderId,
             }
@@ -61,7 +61,7 @@ const db = {
     },
 
     getFolderContents: async (folderId) => {
-        const contents = await prisma.folder.findMany({
+        const contents = await prisma.item.findMany({
             include: {
                 childFolders: true,
             },
@@ -88,11 +88,26 @@ const db = {
         })
     },
   createFolder: async (parentFolderId, userId, folderName) => {
-        await prisma.folder.create({
+        await prisma.item.create({
             data: {
                 parentId: parentFolderId,
                 userId: userId,
-                name: folderName
+                name: folderName,
+                type: "FOLDER",
+                created: new Date(),
+            }
+        })
+    },
+    createFile: async (parentFolderId, userId, fileName, path, size) => {
+        await prisma.item.create({
+            data: {
+                parentId: parentFolderId,
+                userId: userId,
+                name: fileName,
+                type: "FILE",
+                path: path,
+                size: size,
+                created: new Date(),
             }
         })
     }

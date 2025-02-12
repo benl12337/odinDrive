@@ -12,29 +12,39 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model Session {
   id        String   @id
   sid       String   @unique
-  data      String   // MediumText may be needed for MySql
-  expiresAt   DateTime
+  data      String // MediumText may be needed for MySql
+  expiresAt DateTime
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  username String
+  id        Int      @id @default(autoincrement())
+  username  String
   firstName String
-  lastName String
-  hash String
-  folders Folder[]
+  lastName  String
+  hash      String
+  items   Item[]
 }
 
-model Folder {
-  id Int @id @default(autoincrement())
-  name String
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+model Item {
+  id       Int    @id @default(autoincrement())
+  name     String
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int
   parentId Int? // Optional field for parent folder
+  created DateTime
+  type Type
+  path String ?
+  size Int?
 
-  parentFolder Folder? @relation("folderParent", fields: [parentId], references: [id]) // Relation to parent folder
-  childFolders Folder[] @relation("folderParent")
+  parentFolder Item?  @relation("folderParent", fields: [parentId], references: [id]) // Relation to parent folder
+  childFolders Item[] @relation("folderParent")
+}
+
+enum Type {
+  FOLDER
+  FILE
 }

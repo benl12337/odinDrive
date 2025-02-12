@@ -5,10 +5,10 @@
 
 <!-- Folder creation modal -->
 <dialog class="folder-dialog">
-    <h1>Create new folder</h1>
+  <h1>Create new folder</h1>
   <form method="post">
     <div class="modal-input">
-    <input type="text" name="folderName">
+      <input type="text" name="folderName">
     </div>
     <div class="modal-btns">
       <button class="cancel cancel">Cancel</button>
@@ -18,9 +18,9 @@
 </dialog>
 
 <dialog class="upload-dialog">
-    <h1>Upload file</h1>
-  <form method="post" enctype="multipart/form-data">
-    <input type="file" />
+  <h1>Upload file</h1>
+  <form method="post" action="/upload/folders/<%=currFolder.id%>" enctype="multipart/form-data">
+    <input type="file" name="file"/>
     <div class="modal-btns">
       <button class="cancel-upload cancel">Cancel</button>
       <button class="create">Upload</button>
@@ -46,14 +46,20 @@
     </div>
 
     <div class="folders">
-          <!-- Show the column headers -->
-     <div class="attributes-header">
+      <!-- Show the column headers -->
+      <div class="attributes-header">
         <h2>Name</h2>
         <h2>Size</h2>
         <h2>Created</h2>
-     </div>
+      </div>
 
-       <!-- Show child contents here -->
+      <% if (currFolder.parentId) { %>
+      <div class="file-row">
+       <a href="/folders/<%=currFolder.parentId%>"><h3 class="folder-name">...</h3></a>
+      </div>
+      <% } %>
+
+      <!-- Show child contents here -->
       <% if (children.length != 0) { %>
       <% children.map((child)=>{ %>
       <div class="file-row">
@@ -65,8 +71,7 @@
         </a>
         <p>-</p>
         <div class="folder-btns">
-          <button>Edit</button>
-          <button class="delete">Delete</button>
+          <p><%=child.created%></p>
         </div>
       </div>
       <% }) %>
