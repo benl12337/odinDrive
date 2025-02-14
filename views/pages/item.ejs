@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/styles/home.css">
+
+<!-- Universal nav bar -->
+<%- include('../partials/header.ejs') %>
+
+<div class="main-body">
+
+  <!-- Retrive all folders and files here -->
+  <div class="drive-content">
+
+    <!-- print the current folder path name -->
+    <%- include('../partials/tab.ejs') %>
+
+    <div class="folders">
+        <h1><%=item.name%></h1>
+        <h2><%=item.created%></h2>
+        <h3><%=item.size%></h3>
+
+        <div class="item-btns">
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<script defer>
+</script>

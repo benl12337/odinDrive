@@ -30,7 +30,7 @@ module.exports = {
     folderGet: async (req, res, done) => {
         // get current folder
         const folderId = Number(req.params.folderId);
-        const currFolder = await db.getFolderById(folderId);
+        const currFolder = await db.getItemById(folderId);
 
         // get all child folders and files
         const children = await db.getFolderContents(folderId);
@@ -38,7 +38,8 @@ module.exports = {
 
             return {
                 ...child,
-                created:  child.created.toLocaleDateString("en-US", {
+                size: child.size ? convertSize(child.size) : '-',
+                created: child.created.toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
                     year: "numeric",
@@ -56,6 +57,25 @@ module.exports = {
             path: path,
         });
     },
+
+    // get the item details
+    itemGet: async (req, res, done) => {
+        const itemId = Number(req.params.itemId);
+        const currItem = await db.getItemById(itemId);
+        const path = (await db.getCurrentPath(itemId)).reverse();
+
+        const item = {
+            ...currItem,
+            created: currItem.created.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+            }
+            )
+        }
+
+        res.render("pages/item", { item: item, path: path });
+    },
     loginGet: (req, res, done) => {
         req.user ? res.redirect("/") : res.render("pages/login");
     },
@@ -70,8 +90,8 @@ module.exports = {
             res.redirect("/");
         });
     },
-    // POST ROUTES
 
+    // POST ROUTES
     // Handle the user creating a new folder
     folderPost: async (req, res, done) => {
         const currFolder = Number(req.params.folderId);

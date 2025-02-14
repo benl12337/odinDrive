@@ -8,6 +8,7 @@ const upload = multer({dest: 'public/uploads'});
 // GET ROUTES
 indexRouter.get("/", indexController.indexGet);
 indexRouter.get("/folders/:folderId", indexController.folderGet);
+indexRouter.get("/items/:itemId", indexController.itemGet);
 indexRouter.get("/login", indexController.loginGet);
 indexRouter.get("/register",indexController.registerGet);
 indexRouter.get("/logout", indexController.logout);

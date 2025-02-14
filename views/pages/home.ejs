@@ -34,16 +34,7 @@
   <div class="drive-content">
 
     <!-- print the current folder path name -->
-    <div class="tab">
-      <% path.forEach((folder, index)=>{ %>
-      <a href="/folders/<%=folder.id%>">
-        <%=folder.name%>
-      </a>
-      <% if (index !== path.length - 1) { %>
-      <p> > </p>
-      <% } %>
-      <% }) %>
-    </div>
+    <%- include('../partials/tab.ejs') %>
 
     <div class="folders">
       <!-- Show the column headers -->
@@ -64,7 +55,7 @@
       <% if (children.length != 0) { %>
       <% children.map((child)=>{ %>
       <div class="file-row">
-        <a href="/folders/<%=  child.type == 'FOLDER'  ? child.id : child.parentId + '/items/' + child.id  %>">
+        <a href="<%=  child.type == 'FOLDER'  ? child.id : '/items/' + child.id  %>">
           <img src="/img/<%=child.type == 'FILE' ? 'file.svg' : 'folder.svg'%>" class="item-img">
           <h3 class="folder-name">
             <%=child.name%>

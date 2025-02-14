@@ -1,0 +1,10 @@
+<div class="tab">
+    <% path.forEach((folder, index)=>{ %>
+        <a href="<%= folder.type == 'FOLDER' ? `/folders/${folder.id}` : `/items/${folder.id}` %>">
+      <%=folder.name%>
+    </a>
+    <% if (index !== path.length - 1) { %>
+    <p> > </p>
+    <% } %>
+    <% }) %>
+  </div>

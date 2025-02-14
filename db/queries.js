@@ -38,12 +38,12 @@ const db = {
         const path = [];
         
         // get the current folder
-        const folder = await db.getFolderById(currFolderId);
+        const folder = await db.getItemById(currFolderId);
         path.push(folder);
         let parentFolderId = folder.parentId;
 
         while (parentFolderId) {
-            let folder = await db.getFolderById(parentFolderId);
+            let folder = await db.getItemById(parentFolderId);
             path.push(folder);
             parentFolderId = folder.parentId;
         }
@@ -51,7 +51,7 @@ const db = {
         return path;
     },
 
-    getFolderById: async (folderId) => {
+    getItemById: async (folderId) => {
         const folder = await prisma.item.findFirst({
             where: {
                 id: folderId,
@@ -68,7 +68,11 @@ const db = {
             where: {
                 id: folderId,
             },
+            orderBy: {
+                name: 'desc'
+            },
         });
+        console.log(contents[0].childFolders);
         return contents[0].childFolders;
     },
     // when creating a new user- also create their root folder in their drive
