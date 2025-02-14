@@ -62,18 +62,16 @@ const db = {
 
     getFolderContents: async (folderId) => {
         const contents = await prisma.item.findMany({
-            include: {
-                childFolders: true,
-            },
             where: {
-                id: folderId,
+                parentId: folderId,
             },
-            orderBy: {
-                name: 'desc'
-            },
+            orderBy: [
+                {type: 'asc'},
+                {name: 'asc'}
+            ]
         });
-        console.log(contents[0].childFolders);
-        return contents[0].childFolders;
+        console.log(contents);
+        return contents;
     },
     // when creating a new user- also create their root folder in their drive
     createUser: async (username, firstName, lastName, hash) => {

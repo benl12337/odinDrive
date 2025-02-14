@@ -18,6 +18,7 @@ body {
     --background-colour: #f3edf5;
     --complementary-colour: #fd96a9;
     --opposing-colour: #c0c999;
+    --grid-proportions: 70% 10% 10% 5%;
     background: var(--background-colour);
 }
 
@@ -150,7 +151,7 @@ body {
 
 .file-row {
     display: grid;
-    grid-template-columns: 60% 20% 20%;
+    grid-template-columns: var(--grid-proportions);
     align-items: center;
     width: 100%;
     box-sizing: border-box;
@@ -218,6 +219,16 @@ body {
     width: 30px;
 }
 
+.action-img {
+    width: 20px;
+}
+
+.action-img:hover {
+    transform: scale(105%);
+    cursor: pointer;
+    transition: 100ms ease;
+}
+
 .folder-name {
     margin: 0px 10px;
 }
@@ -270,12 +281,16 @@ body {
     padding: 10px 15px;
     margin: 0;
     display: grid;
-    grid-template-columns: 60% 20% 20%;
-
+    grid-template-columns: var(--grid-proportions);
+    justify-content: space-between;
     h2 {
         font-family: "Roboto";
         font-weight: 300;
         font-size: 1rem;
         color: rgb(122, 122, 122);
     }
+}
+
+.folder-btns {
+    display: flex;
 }

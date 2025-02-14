@@ -42,6 +42,7 @@
         <h2>Name</h2>
         <h2>Size</h2>
         <h2>Created</h2>
+        <h2>Action</h2>
       </div>
 
       <!-- include link to previous folder (if it exists) -->
@@ -64,8 +65,12 @@
 
         <!-- if a folder, show - otherwise show the file size -->
         <p><%=child.size ? child.size : '-'%></p>
-        <div class="folder-btns">
+        <div class="created">
           <p><%=child.created%></p>
+        </div>
+        <div class="folder-btns">
+          <a href="/items/<%=child.id%>"><img src="/img/edit.svg" class="action-img"></a>
+          <a href="/<%=child.path%>"><img src="/img/download.svg" class="action-img"></a>
         </div>
       </div>
       <% }) %>

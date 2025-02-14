@@ -66,6 +66,7 @@ module.exports = {
 
         const item = {
             ...currItem,
+            size: convertSize(currItem.size),
             created: currItem.created.toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
