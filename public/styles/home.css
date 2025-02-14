@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -30,12 +31,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     a {
         text-decoration: none;
         color: black;
         padding: 10px;
         font-family: "Lato", serif;
     }
+
     a:hover {
         color: rgb(66, 65, 65);
         transition: ease 300ms;
@@ -61,10 +64,10 @@ body {
     width: 150px;
     font-size: 1rem;
     border-radius: 5px;
-        font-family: "Lato", serif;
-        font-weight: 400;
-        font-style: normal;
-    
+    font-family: "Lato", serif;
+    font-weight: 400;
+    font-style: normal;
+
 }
 
 .logo-text {
@@ -87,6 +90,7 @@ body {
     width: 75%;
     height: 75vh;
     filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.15));
+
     h1 {
         font-family: "Lato", serif;
         border-bottom: 1px solid grey;
@@ -111,6 +115,7 @@ body {
     padding: 5px 5px;
     margin: 0px 5px;
 }
+
 .tab a:hover {
     background: var(--accent-colour-lighter);
 }
@@ -126,15 +131,18 @@ body {
     filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.15));
     border: 1px solid var(--opposing-colour);
     font-family: "Lato", serif;
+
     form {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
+
     input {
         width: 100%;
         margin: 0;
     }
+
     h1 {
         margin-bottom: 15px;
     }
@@ -151,26 +159,33 @@ body {
     border-bottom: 1px solid rgb(236, 229, 229);
     font-family: "Roboto", serif;
     font-weight: 100;
-p {
-    margin-left: 5px;
-    color: rgb(102, 100, 100);
-    font-size: .75rem;
-}    
+
+    p {
+        margin-left: 5px;
+        color: rgb(102, 100, 100);
+        font-size: .75rem;
+    }
+
     a {
         text-decoration: none;
         color: black;
     }
+
     h3 {
         font-family: "Roboto", serif;
         font-weight: 200;
         font-size: 1rem;
+        display: flex;
+        align-items: center;
     }
+
     button {
         background: rgb(211, 209, 209);
         border: none;
         border-radius: 5px;
         padding: 5px 5px;
     }
+
     button:hover {
         background: rgb(162, 160, 160);
         cursor: pointer;
@@ -200,8 +215,7 @@ p {
 }
 
 .item-img {
-    width: 15px;
-    transform: scaleX(125%);
+    width: 30px;
 }
 
 .folder-name {
@@ -214,6 +228,7 @@ p {
     display: flex;
     justify-content: center;
     padding-top: 20%;
+
     h4 {
         border: 0;
         color: grey;
@@ -226,6 +241,7 @@ p {
 .modal-btns {
     display: flex;
     justify-content: right;
+
     button {
         padding: 10px 20px;
         border-radius: 5px;
@@ -234,11 +250,13 @@ p {
         margin-top: 10px;
         font-family: "Lato", serif;
     }
+
     button:hover {
         cursor: pointer;
         filter: brightness(90%);
         transition: 200ms ease;
     }
+
     .create {
         background: var(--accent-colour);
         color: white;
@@ -253,6 +271,7 @@ p {
     margin: 0;
     display: grid;
     grid-template-columns: 60% 20% 20%;
+
     h2 {
         font-family: "Roboto";
         font-weight: 300;

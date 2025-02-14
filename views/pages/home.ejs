@@ -53,6 +53,7 @@
         <h2>Created</h2>
       </div>
 
+      <!-- include link to previous folder (if it exists) -->
       <% if (currFolder.parentId) { %>
       <div class="file-row">
        <a href="/folders/<%=currFolder.parentId%>"><h3 class="folder-name">...</h3></a>
@@ -63,7 +64,7 @@
       <% if (children.length != 0) { %>
       <% children.map((child)=>{ %>
       <div class="file-row">
-        <a href="/folders/<%=child.id%>">
+        <a href="/folders/<%=  child.type == 'FOLDER'  ? child.id : child.parentId + '/items/' + child.id  %>">
           <img src="/img/<%=child.type == 'FILE' ? 'file.svg' : 'folder.svg'%>" class="item-img">
           <h3 class="folder-name">
             <%=child.name%>
@@ -85,8 +86,6 @@
     </div>
   </div>
 </div>
-
-<h1><%= userMessage %></h1>
 
 <script defer>
   const dialog = document.querySelector(".folder-dialog");
