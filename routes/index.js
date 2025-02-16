@@ -16,7 +16,9 @@ indexRouter.get("/logout", indexController.logout);
 // POST ROUTES
 indexRouter.post("/login", indexController.loginPost);
 indexRouter.post("/folders/:folderId", indexController.folderPost); // create a new folder
+indexRouter.post("/items/:itemId", indexController.itemPost); // update item
 indexRouter.post("/upload/folders/:folderId", upload.single('file'), indexController.uploadPost); // upload a file to specified folder
+indexRouter.post("/delete/:itemId", indexController.itemDelete);
 indexRouter.post("/register", indexController.registerPost);
 
 module.exports = indexRouter;

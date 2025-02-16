@@ -10,7 +10,6 @@ const db = {
                 username: username,
             }
         });
-        console.log('returning user:', user);
         return user[0];
     },
 
@@ -40,7 +39,8 @@ const db = {
         // get the current folder
         const folder = await db.getItemById(currFolderId);
         path.push(folder);
-        let parentFolderId = folder.parentId;
+
+        let parentFolderId = folder.parentId || null;
 
         while (parentFolderId) {
             let folder = await db.getItemById(parentFolderId);
@@ -70,7 +70,6 @@ const db = {
                 {name: 'asc'}
             ]
         });
-        console.log(contents);
         return contents;
     },
     // when creating a new user- also create their root folder in their drive
@@ -112,6 +111,39 @@ const db = {
                 created: new Date(),
             }
         })
+    },
+
+    updateItem: async (itemId, itemName) =>{
+        await prisma.item.update({
+            where: {
+                id: itemId,
+            },
+            data: {
+                name: itemName,
+            },
+        });
+    },
+
+    deleteItem: async (itemId) => {
+        await prisma.item.delete({
+            where: {
+                id: itemId,
+            }
+        })
+    },
+
+    verifyName: async(name, type, parentFolderId) => {
+        // confirm that an item of the same name does not already exist
+        
+        
+        const foundItem = await prisma.item.findMany({
+            where: {
+                name: name,
+                type: type,
+                parentId: parentFolderId,
+            }
+        });
+        return foundItem.length > 0 ? false : true;
     }
 }
 

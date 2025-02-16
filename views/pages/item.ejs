@@ -12,18 +12,17 @@
     <%- include('../partials/tab.ejs') %>
 
     <div class="folders">
-        <h1><%=item.name%></h1>
-        <h2><%=item.created%></h2>
-        <h3><%=item.size%></h3>
-
+      <form method="post">
+        <label class="rename-title" for="itemName">Rename:</label>
+        <input type="text" value="<%=item.name%>" name="itemName">
         <div class="item-btns">
-            <button>Edit</button>
-            <button>Delete</button>
+          <button class="main-btn submit">Update</button>
         </div>
-
+      </form>
+  <form action="/delete/<%=item.id%>" method="post">
+    <div class="delete-btn"> <a href="/delete/<%=item.id%>"><button class="submit delete">Delete</button></a>
+  </form>
+      </div>
     </div>
   </div>
 </div>
-
-<script defer>
-</script>

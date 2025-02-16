@@ -20,7 +20,7 @@
 <dialog class="upload-dialog">
   <h1>Upload file</h1>
   <form method="post" action="/upload/folders/<%=currFolder.id%>" enctype="multipart/form-data">
-    <input type="file" name="file"/>
+    <input type="file" name="file" />
     <div class="modal-btns">
       <button class="cancel-upload cancel">Cancel</button>
       <button class="create">Upload</button>
@@ -48,7 +48,9 @@
       <!-- include link to previous folder (if it exists) -->
       <% if (currFolder.parentId) { %>
       <div class="file-row">
-       <a href="/folders/<%=currFolder.parentId%>"><h3 class="folder-name">...</h3></a>
+        <a href="/folders/<%=currFolder.parentId%>">
+          <h3 class="folder-name">...</h3>
+        </a>
       </div>
       <% } %>
 
@@ -70,7 +72,9 @@
         </div>
         <div class="folder-btns">
           <a href="/items/<%=child.id%>"><img src="/img/edit.svg" class="action-img"></a>
+          <% if (child.type == 'FILE') { %>
           <a href="/<%=child.path%>"><img src="/img/download.svg" class="action-img"></a>
+          <% } %>
         </div>
       </div>
       <% }) %>

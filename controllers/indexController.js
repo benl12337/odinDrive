@@ -97,13 +97,46 @@ module.exports = {
     folderPost: async (req, res, done) => {
         const currFolder = Number(req.params.folderId);
 
-        // create a new folder with the current folderId as the parent
+        // create a new folder with the current folderId
+        // Ensure folder name does not already exists
+        const folderValid = await db.verifyName(req.body.folderName, 'FOLDER', currFolder);
+        if (folderValid) {
+            try {
+                await db.createFolder(currFolder, req.user.id, req.body.folderName);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        res.redirect(`/folders/${currFolder}`);
+    },
+    
+    // Update the name of a folder
+    itemPost: async (req,res,done) => {
+        const currItemId = Number(req.params.itemId);
+        const currItem = await db.getItemById(currItemId);
+        const folderValid = await db.verifyName(req.body.itemName, currItem.type, currItem.parentId);
+
+        if (folderValid) {
+            try {
+                // update the item name
+                await db.updateItem(currItemId, req.body.itemName);
+            } catch(err) {
+                console.error(err);
+            }
+        }
+        res.redirect(`/folders/${currItem.parentId}`);
+    },
+
+    itemDelete: async(req,res,done) => {
+        const currItemId = Number(req.params.itemId);
+        const item = await db.getItemById(currItemId);
+        const parentId = item.parentId;
         try {
-            await db.createFolder(currFolder, req.user.id, req.body.folderName);
+            await db.deleteItem(currItemId);
         } catch (err) {
             console.error(err);
         }
-        res.redirect(`/folders/${currFolder}`);
+        res.redirect(`/folders/${parentId}`);
     },
 
     loginPost: passport.authenticate("local",
