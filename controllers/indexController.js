@@ -151,14 +151,13 @@ module.exports = {
         const userId = req.user.id;
         const currFolder = await db.getItemById(Number(req.params.folderId));
 
-        // the path should be the current folder name + the file name
-        const path = currFolder.name + file.filename;
+        // the path should be the current folder name + the original file name
+        const path = currFolder.name + file.originalname;
 
-        console.log('the file being uploaded is: ', req.file);
         // upload the file to supabase
-        await supabase.uploadFile(req.file, path);
+        await supabase.uploadFile(req.file.buffer, path);
 
-        // create file reference
+        // create file reference in db
         await db.createFile(Number(currFolder.id), userId, file.originalname, path, file.size);
 
         setTimeout(() => {
@@ -168,7 +167,7 @@ module.exports = {
 
     itemDownload: async (req,res,done) => {
         const item = await db.getItemById(Number(req.params.itemId));
-
+        
         try {
             const data = await supabase.downloadFile(item.path);
             const fileBuffer = Buffer.from(await data.arrayBuffer());

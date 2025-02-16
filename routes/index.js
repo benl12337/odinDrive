@@ -2,14 +2,15 @@ const { Router } = require("express");
 const indexRouter = Router();
 const indexController = require("../controllers/indexController");
 const multer = require('multer');
-const upload = multer({dest: 'public/uploads'});
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 
 // GET ROUTES
 indexRouter.get("/", indexController.indexGet);
 indexRouter.get("/folders/:folderId", indexController.folderGet);
 indexRouter.get("/items/:itemId", indexController.itemGet);
-indexRouter.post("/download/:itemId", indexController.itemDownload) // download an item
+indexRouter.get("/download/:itemId", indexController.itemDownload) // download an item
 indexRouter.get("/login", indexController.loginGet);
 indexRouter.get("/register",indexController.registerGet);
 indexRouter.get("/logout", indexController.logout);
