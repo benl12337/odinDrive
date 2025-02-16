@@ -73,7 +73,9 @@
         <div class="folder-btns">
           <a href="/items/<%=child.id%>"><img src="/img/edit.svg" class="action-img"></a>
           <% if (child.type == 'FILE') { %>
-          <a href="/<%=child.path%>"><img src="/img/download.svg" class="action-img"></a>
+          <a href="/download/<%=child.id%>">
+  <img src="/img/download.svg" class="action-img">
+</a>
           <% } %>
         </div>
       </div>

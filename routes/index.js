@@ -9,9 +9,11 @@ const upload = multer({dest: 'public/uploads'});
 indexRouter.get("/", indexController.indexGet);
 indexRouter.get("/folders/:folderId", indexController.folderGet);
 indexRouter.get("/items/:itemId", indexController.itemGet);
+indexRouter.post("/download/:itemId", indexController.itemDownload) // download an item
 indexRouter.get("/login", indexController.loginGet);
 indexRouter.get("/register",indexController.registerGet);
 indexRouter.get("/logout", indexController.logout);
+
 
 // POST ROUTES
 indexRouter.post("/login", indexController.loginPost);

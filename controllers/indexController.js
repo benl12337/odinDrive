@@ -2,6 +2,7 @@ const db = require("../db/queries");
 const genPassword = require("../lib/passwordUtils").genPassword;
 const passport = require("passport");
 const convertSize = require("../lib/convertSize");
+const supabase = require("../lib/supabase");
 
 module.exports = {
     indexGet: async (req, res, done) => {
@@ -148,15 +149,36 @@ module.exports = {
     uploadPost: async (req, res, done) => {
         const file = req.file;
         const userId = req.user.id;
-        const parentId = req.params.folderId;
+        const currFolder = await db.getItemById(Number(req.params.folderId));
 
+        // the path should be the current folder name + the file name
+        const path = currFolder.name + file.filename;
+
+        console.log('the file being uploaded is: ', req.file);
+        // upload the file to supabase
+        await supabase.uploadFile(req.file, path);
 
         // create file reference
-        await db.createFile(Number(parentId), userId, file.originalname, file.path, file.size);
+        await db.createFile(Number(currFolder.id), userId, file.originalname, path, file.size);
 
         setTimeout(() => {
             res.redirect(`/folders/${req.params.folderId}`);
         }, 3000);
+    },
+
+    itemDownload: async (req,res,done) => {
+        const item = await db.getItemById(Number(req.params.itemId));
+
+        try {
+            const data = await supabase.downloadFile(item.path);
+            const fileBuffer = Buffer.from(await data.arrayBuffer());
+            res.setHeader('Content-Disposition', `attachment; filename="${item.name}"`);
+            res.setHeader('Content-Type', data.type); // Auto-detects file type
+            
+            res.send(fileBuffer);
+        } catch(error) {
+            console.log(error);
+        }
     },
 
     registerPost: async (req, res, done) => {

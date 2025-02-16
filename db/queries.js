@@ -80,9 +80,11 @@ const db = {
                 firstName: firstName,
                 lastName: lastName,
                 hash: hash,
-                folders: {
+                items: {
                     create: {
-                        name: 'My Drive'
+                        name: 'My Drive',
+                        created: new Date(),
+                        type: "FOLDER",
                     },
                 },
             },
