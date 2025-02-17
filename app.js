@@ -3,6 +3,7 @@ require("dotenv").config(); // load in environment variables
 // required modules
 const express = require("express");
 const session = require("express-session");
+const flash = require('connect-flash');
 const routes = require("./routes/index");
 const path = require("node:path");
 const sessionStore = require("./config/session");
@@ -27,6 +28,11 @@ app.use(passport.session());
 
 // ROUTES
 app.use(routes);
+app.use(flash());
+app.use((req,res,next)=>{
+    res.locals.successMessage = req.flash('success'); // save the success message
+    next();
+});
 
 // SERVER
 app.listen(3000, ()=> console.log('SERVER IS RUNNING'));
