@@ -56,6 +56,7 @@ module.exports = {
             currFolder: currFolder,
             children: formattedChildren,
             path: path,
+            message: req.flash('message'),
         });
     },
 
@@ -79,7 +80,7 @@ module.exports = {
         res.render("pages/item", { item: item, path: path });
     },
     loginGet: (req, res, done) => {
-        req.user ? res.redirect("/") : res.render("pages/login");
+        req.user ? res.redirect("/") : res.render("pages/login", {message: req.flash('message')});
     },
     registerGet: (req, res, done) => {
         req.user ? res.redirect("/") : res.render("pages/register");
@@ -104,6 +105,8 @@ module.exports = {
         if (folderValid) {
             try {
                 await db.createFolder(currFolder, req.user.id, req.body.folderName);
+                req.flash('message');
+                req.flash('message', 'Folder created successfully!');
             } catch (err) {
                 console.error(err);
             }
@@ -121,6 +124,8 @@ module.exports = {
             try {
                 // update the item name
                 await db.updateItem(currItemId, req.body.itemName);
+                req.flash('message');
+                req.flash('message', 'Successfully renamed item');
             } catch(err) {
                 console.error(err);
             }
@@ -134,6 +139,8 @@ module.exports = {
         const parentId = item.parentId;
         try {
             await db.deleteItem(currItemId);
+            req.flash('message');
+            req.flash('message', 'Items deleted succesfully');
         } catch (err) {
             console.error(err);
         }
@@ -159,7 +166,8 @@ module.exports = {
 
         // create file reference in db
         await db.createFile(Number(currFolder.id), userId, file.originalname, path, file.size);
-
+        req.flash('message');
+        req.flash('message', 'Successfully uploaded item')
         setTimeout(() => {
             res.redirect(`/folders/${req.params.folderId}`);
         }, 3000);
@@ -188,10 +196,12 @@ module.exports = {
         // add new user to database and create their first Folder
         try {
             await db.createUser(req.body.username, req.body.firstName, req.body.lastName, hashedPw);
-            console.log('Successfully created user');
+
         } catch (err) {
             console.error(err);
         }
+        req.flash('message');
+        req.flash('message', 'Account created successfully');
         res.redirect("/login");
     }
 }

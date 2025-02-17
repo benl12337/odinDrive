@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/styles/index.css">
+<link rel="stylesheet" href="/styles/home.css">
 
 <title>OdinDrive</title>
 
@@ -13,3 +14,25 @@
     </form>
     </div>
 </div>
+
+<% if (message.length) { %>
+    <div class="notification">
+      <%=message%>
+    </div>
+  <% } %>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const notif = document.querySelector(".notification");
+      console.log(notif);
+
+      if (notif) {
+        notif.classList.add("show-notification");
+
+        // Hide after 5 seconds
+        setTimeout(() => {
+          notif.classList.remove("show-notification");
+        }, 2500);
+      }
+    });
+  </script>
