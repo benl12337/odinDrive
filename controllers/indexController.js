@@ -152,7 +152,7 @@ module.exports = {
         const currFolder = await db.getItemById(Number(req.params.folderId));
 
         // the path should be the current folder name + the original file name
-        const path = currFolder.name + file.originalname;
+        const path = req.user.id + "/" + currFolder.name + file.originalname;
 
         // upload the file to supabase
         await supabase.uploadFile(req.file.buffer, path);
